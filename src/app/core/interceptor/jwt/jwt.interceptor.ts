@@ -1,4 +1,5 @@
 import {
+  HTTP_INTERCEPTORS,
   HttpEvent,
   HttpHandler,
   HttpHeaders,
@@ -7,7 +8,7 @@ import {
 } from '@angular/common/http';
 
 import { AuthService } from '@core/service';
-import { Injectable } from '@angular/core';
+import { Injectable, Provider } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -28,4 +29,7 @@ export class JwtInterceptor implements HttpInterceptor {
     }
     return next.handle(request.clone({ headers }));
   }
+}
+export function provideJwtInterceptor(): Provider {
+  return { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
 }

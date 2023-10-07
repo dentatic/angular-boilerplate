@@ -1,4 +1,5 @@
 import {
+  HTTP_INTERCEPTORS,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
@@ -6,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable, finalize } from 'rxjs';
 
-import { Injectable } from '@angular/core';
+import { Injectable, Provider } from '@angular/core';
 import { LoaderService } from '@core/service';
 
 @Injectable()
@@ -22,4 +23,7 @@ export class LoaderInterceptor implements HttpInterceptor {
       if (this.totalRequest === 0) this.loaderService.setLoader(false)
     }));
   }
+}
+export function provideLoaderInterceptor(): Provider {
+  return { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
 }
