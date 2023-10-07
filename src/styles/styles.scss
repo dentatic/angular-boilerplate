@@ -1,0 +1,17 @@
+@use "vendors";
+@use "theme";
+@use "base";
+@use "abstract";
+@use "components";
+@use "layout";
+@use "pages";
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+main{
+  flex-grow: 1;
+}
